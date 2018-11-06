@@ -10,7 +10,7 @@
 Helpers usable in the tests
 """
 
-import xmlrpclib
+import xmlrpc.client as xmlrpclib
 import logging
 
 import mock

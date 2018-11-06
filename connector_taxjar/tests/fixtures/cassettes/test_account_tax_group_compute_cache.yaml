@@ -13,7 +13,7 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [TaxJarPython/1.1.2]
     method: POST
-    uri: http://api.taxjar.com/v2/taxes
+    uri: https://api.taxjar.com/v2/taxes
   response:
     body: {string: !!python/unicode '{"tax":{"order_total_amount":158.0,"shipping":0.0,"taxable_amount":158.0,"amount_to_collect":13.04,"rate":0.0825,"has_nexus":true,"freight_taxable":false,"tax_source":"destination","breakdown":{"taxable_amount":158.0,"tax_collectable":13.04,"combined_tax_rate":0.0825,"state_taxable_amount":0.0,"state_tax_rate":0.0,"state_tax_collectable":0.0,"county_taxable_amount":158.0,"county_tax_rate":0.0825,"county_tax_collectable":13.04,"city_taxable_amount":0.0,"city_tax_rate":0.0,"city_tax_collectable":0.0,"special_district_taxable_amount":0.0,"special_tax_rate":0.0,"special_district_tax_collectable":0.0,"line_items":[{"id":"The
         Same UUID!","taxable_amount":158.0,"tax_collectable":13.04,"combined_tax_rate":0.0825,"state_taxable_amount":0.0,"state_sales_tax_rate":0.0,"state_amount":0.0,"county_taxable_amount":158.0,"county_tax_rate":0.0825,"county_amount":13.04,"city_taxable_amount":0.0,"city_tax_rate":0.0,"city_amount":0.0,"special_district_taxable_amount":0.0,"special_tax_rate":0.0,"special_district_amount":0.0}]}}}'}

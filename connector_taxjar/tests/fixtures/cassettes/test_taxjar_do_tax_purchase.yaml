@@ -13,7 +13,7 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [TaxJarPython/1.1.2]
     method: POST
-    uri: http://api.taxjar.com/v2/taxes
+    uri: https://api.taxjar.com/v2/taxes
   response:
     body: {string: !!python/unicode '{"tax":{"order_total_amount":79.0,"shipping":0.0,"taxable_amount":79.0,"amount_to_collect":6.52,"rate":0.0825,"has_nexus":true,"freight_taxable":false,"tax_source":"destination","breakdown":{"taxable_amount":79.0,"tax_collectable":6.52,"combined_tax_rate":0.0825,"state_taxable_amount":0.0,"state_tax_rate":0.0,"state_tax_collectable":0.0,"county_taxable_amount":79.0,"county_tax_rate":0.0825,"county_tax_collectable":6.52,"city_taxable_amount":0.0,"city_tax_rate":0.0,"city_tax_collectable":0.0,"special_district_taxable_amount":0.0,"special_tax_rate":0.0,"special_district_tax_collectable":0.0,"line_items":[{"id":"The
         Same UUID!","taxable_amount":79.0,"tax_collectable":6.52,"combined_tax_rate":0.0825,"state_taxable_amount":0.0,"state_sales_tax_rate":0.0,"state_amount":0.0,"county_taxable_amount":79.0,"county_tax_rate":0.0825,"county_amount":6.52,"city_taxable_amount":0.0,"city_tax_rate":0.0,"city_amount":0.0,"special_district_taxable_amount":0.0,"special_tax_rate":0.0,"special_district_amount":0.0}]}}}'}
@@ -44,7 +44,7 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [TaxJarPython/1.1.2]
     method: POST
-    uri: http://api.taxjar.com/v2/transactions/orders
+    uri: https://api.taxjar.com/v2/transactions/orders
   response:
     body: {string: !!python/unicode '{"order":{"transaction_id":"48","user_id":56398,"transaction_date":"2017-12-12T00:00:00.000Z","transaction_reference_id":null,"from_country":"US","from_zip":"18540","from_state":"PA","from_city":"SCRANTON","from_street":"1725
         Slough Ave.","to_country":"US","to_zip":"89015","to_state":"NV","to_city":"FALSE","to_street":"240

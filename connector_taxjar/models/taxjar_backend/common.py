@@ -10,6 +10,8 @@ class TaxjarBackend(models.Model):
     _inherit = 'connector.backend',
     _backend_type = 'taxjar'
 
+    name = fields.Char(required=True)
+
     version = fields.Selection(
         selection='_get_versions',
         default='v2',

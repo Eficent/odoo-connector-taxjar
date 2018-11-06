@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [TaxJarPython/1.1.2]
     method: GET
-    uri: http://api.taxjar.com/v2/categories
+    uri: https://api.taxjar.com/v2/categories
   response:
     body: {string: !!python/unicode '{"categories":[{"name":"Digital Goods","product_tax_code":"31000","description":"Digital
         products transferred electronically, meaning obtained by the purchaser by
@@ -52,7 +52,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [TaxJarPython/1.1.2]
     method: GET
-    uri: http://api.taxjar.com/v2/nexus/regions
+    uri: https://api.taxjar.com/v2/nexus/regions
   response:
     body: {string: !!python/unicode '{"regions":[{"country_code":"US","country":"United
         States","region_code":"NV","region":"Nevada"}]}'}
