@@ -306,7 +306,7 @@ class AccountTaxRate(models.TransientModel):
 
         return rate
 
-    @api.model_cr_context
+    @api.model
     def _group_rate_line_values(self, rate_line_values):
         """Return the rate line values as an ordered dict keyed by tax group.
         """
@@ -319,7 +319,7 @@ class AccountTaxRate(models.TransientModel):
                 grouped_lines[tax.tax_group_id] = [rate_line_value]
         return grouped_lines
 
-    @api.model_cr_context
+    @api.model
     def _split_taxes_in_lines(self, rate_lines):
         """Return rate lines for each tax in ``tax_ids``."""
         out_lines = []

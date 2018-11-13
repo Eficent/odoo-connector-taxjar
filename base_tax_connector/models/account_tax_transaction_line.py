@@ -144,7 +144,7 @@ class AccountTaxTransactionLine(models.Model):
 
         return refund_values
 
-    @api.model_cr_context
+    @api.model
     def _get_invoice_lines_for_tax(self, tax, invoice):
         return invoice.invoice_line_ids.filtered(
             lambda r: tax in r.invoice_line_tax_ids,

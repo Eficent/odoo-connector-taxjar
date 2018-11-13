@@ -23,7 +23,8 @@ class TaxjarAdapter(AbstractComponent):
 
     def __init__(self, connector_env):
         super(TaxjarAdapter, self).__init__(connector_env)
-        self.taxjar = taxjar.Client(api_key=self.backend_record.api_key)
+        self.taxjar = taxjar.Client(api_key=self.backend_record.api_key,
+                                    api_url=self.backend_record.api_url)
 
     # pylint: disable=W8106
     def read(self, external_id):

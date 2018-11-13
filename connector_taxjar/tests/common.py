@@ -202,7 +202,7 @@ class TaxjarTestCase(SavepointComponentCase):
         equals = []
         for expected in expected_records:
             for record in records:
-                for field, value in expected._asdict().iteritems():
+                for field, value in expected._asdict().items():
                     if not getattr(record, field) == value:
                         break
                 else:
@@ -227,7 +227,7 @@ class TaxjarTestCase(SavepointComponentCase):
                 u' - {}({})'.format(
                     model_name,
                     u', '.join(u'%s: %s' % (k, v) for
-                               k, v in expected._asdict().iteritems())
+                               k, v in expected._asdict().items())
                 )
             )
         for record in records:

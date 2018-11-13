@@ -20,6 +20,10 @@ class TaxjarBackend(models.Model):
     api_key = fields.Char(
         required=True,
     )
+    api_url = fields.Char(
+        required=True,
+        default='https://api.taxjar.com'
+    )
     is_exporter = fields.Boolean(
         string='Export Transactions',
         default=True,

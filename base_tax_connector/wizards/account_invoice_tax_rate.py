@@ -10,11 +10,11 @@ class AccountInvoiceTaxRate(models.AbstractModel):
     _name = 'account.invoice.tax.rate'
     _description = 'Account Invoice Tax Rate'
 
-    @api.model_cr_context
+    @api.model
     def get_rate_lines(self, invoice):
         return [self.get_rate_line(l) for l in invoice.invoice_line_ids]
 
-    @api.model_cr_context
+    @api.model
     def get_rate_line(self, invoice_line):
         # @TODO: this is wrong
         try:
@@ -37,14 +37,14 @@ class AccountInvoiceTaxRate(models.AbstractModel):
             'reference': invoice_line,
         }
 
-    @api.model_cr_context
+    @api.model
     def get_company(self, invoice):
         return invoice.company_id
 
-    @api.model_cr_context
+    @api.model
     def get_partner(self, invoice):
         return invoice.partner_id.commercial_partner_id
 
-    @api.model_cr_context
+    @api.model
     def get_untaxed_amount(self, invoice):
         return invoice.amount_untaxed

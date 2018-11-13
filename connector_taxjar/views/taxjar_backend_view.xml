@@ -26,6 +26,7 @@
 
                     <group name="group_configuration"
                            string="Configuration">
+                        <field name="api_url" />
                         <field name="api_key" widget="password" />
                         <field name="company_id" />
                     </group>
