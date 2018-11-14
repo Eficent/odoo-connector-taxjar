@@ -35,7 +35,8 @@ class AccountTaxGroup(models.Model):
             account_invoice_tax
         )
         if self.cache_name and 'taxjar' in self.cache_name:
-            delayed = self.env['taxjar.account.tax.group'].with_delay()
+            # TODO Readd .with_delay() when work
+            delayed = self.env['taxjar.account.tax.group']
             return delayed.do_tax_purchase(transaction)
         return transaction
 
@@ -45,7 +46,8 @@ class AccountTaxGroup(models.Model):
             account_invoice_tax
         )
         if self.cache_name and 'taxjar' in self.cache_name:
-            delayed = self.env['taxjar.account.tax.group'].with_delay()
+            # TODO Readd .with_delay() when work
+            delayed = self.env['taxjar.account.tax.group']
             return delayed.do_tax_refund(transaction)
         return transaction
 
