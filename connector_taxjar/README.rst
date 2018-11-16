@@ -1,8 +1,8 @@
 |License AGPL-3| | |Build Status| | |Test Coverage|
 
-===============
+================
 Taxjar Connector
-===============
+================
 
 This module allows for you to synchronize Odoo and Taxjar in the following
 capacities:
@@ -31,9 +31,8 @@ To configure this module, you need to:
 #. Create a new backend.
 #. Click ``Import Metadata`` to perform the initial data import.
 #. Restart Odoo
-   * This is required for the async job queue. If purchases or refunds are not
-     being sent, you either did not restart Odoo or did not properly setup
-     ``queue_job``.
+
+* This is required for the async job queue. If purchases or refunds are not being sent, you either did not restart Odoo or did not properly setup ``queue_job``.
 
 
 Usage
