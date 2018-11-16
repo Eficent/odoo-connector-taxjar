@@ -11,11 +11,11 @@ class PurchaseOrderTaxRate(models.AbstractModel):
     _name = 'purchase.order.tax.rate'
     _description = 'Purchase Order Tax Rate'
 
-    @api.model
+    @api.model_cr_context
     def get_rate_lines(self, purchase):
         return [self.get_rate_line(l) for l in purchase.order_line]
 
-    @api.model
+    @api.model_cr_context
     def get_rate_line(self, purchase_line):
         """Return values for a rate line representing multiple taxes."""
         partner = self.get_partner(purchase_line.order_id)
@@ -33,14 +33,14 @@ class PurchaseOrderTaxRate(models.AbstractModel):
             'reference': purchase_line,
         }
 
-    @api.model
+    @api.model_cr_context
     def get_company(self, purchase):
         return purchase.company_id
 
-    @api.model
+    @api.model_cr_context
     def get_partner(self, purchase):
         return purchase.partner_id.commercial_partner_id
 
-    @api.model
+    @api.model_cr_context
     def get_untaxed_amount(self, purchase):
         return purchase.amount_untaxed

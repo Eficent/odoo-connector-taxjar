@@ -11,11 +11,11 @@ class SaleOrderTaxRate(models.AbstractModel):
     _name = 'sale.order.tax.rate'
     _description = 'Sale Order Tax Rate'
 
-    @api.model
+    @api.model_cr_context
     def get_rate_lines(self, sale):
         return [self.get_rate_line(l) for l in sale.order_line]
 
-    @api.model
+    @api.model_cr_context
     def get_rate_line(self, sale_line):
         """Return values for a rate line representing multiple taxes."""
         try:
@@ -38,14 +38,14 @@ class SaleOrderTaxRate(models.AbstractModel):
             'reference': sale_line,
         }
 
-    @api.model
+    @api.model_cr_context
     def get_company(self, sale):
         return sale.company_id
 
-    @api.model
+    @api.model_cr_context
     def get_partner(self, sale):
         return sale.partner_id.commercial_partner_id
 
-    @api.model
+    @api.model_cr_context
     def get_untaxed_amount(self, sale):
         return sale.amount_untaxed
