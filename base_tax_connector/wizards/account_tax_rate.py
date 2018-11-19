@@ -85,9 +85,6 @@ class AccountTaxRate(models.TransientModel):
         selection='_get_reference_models',
         help='The record that this rate represents.',
     )
-    is_dirty = fields.Boolean(
-        compute='_compute_is_dirty',
-    )
 
     @api.multi
     @api.depends('price_base', 'price_tax')
@@ -153,10 +150,12 @@ class AccountTaxRate(models.TransientModel):
         rate_lines = self._split_taxes_in_lines(
             interface.get_rate_lines(self.reference),
         )
-
+        if len(self.line_ids) != len(rate_lines):
+            return True
         for idx, rate_line in enumerate(self.line_ids):
             if rate_line.is_dirty(rate_lines[idx]):
                 return True
+        return False
 
     @api.model
     def get_rate_values(self, reference, interface_name=None):
@@ -246,12 +245,12 @@ class AccountTaxRate(models.TransientModel):
 
         # If there was no rate found, try a less precise search.
         # This covers onchange scenarios, in which all ``id``s are ``NewId``.
-        if not rate:
-            domain_sloppy = [
-                ('partner_id', '=', rate_values['partner_id']),
-                ('company_id', '=', rate_values['company_id']),
-            ]
-            rate = self.search(base_domain + domain_sloppy, limit=1)
+        # if not rate:
+        #     domain_sloppy = [
+        #         ('partner_id', '=', rate_values['partner_id']),
+        #         ('company_id', '=', rate_values['company_id']),
+        #     ]
+        #     rate = self.search(base_domain + domain_sloppy, limit=1)
 
         if rate and not origin and not rate.is_dirty():
             _logger.info('Rate is not dirty. Return it without mods')

@@ -75,7 +75,7 @@ class AccountTaxTransaction(models.Model):
     @api.depends('invoice_line_ids')
     def _compute_invoice_id(self):
         for record in self:
-            record.invoice_id = record.invoice_line_ids[0:].invoice_id.id
+            record.invoice_id = record.invoice_line_ids[0].invoice_id.id
 
     @api.multi
     @api.depends('line_ids.invoice_line_ids')
