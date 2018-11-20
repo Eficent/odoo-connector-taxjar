@@ -177,7 +177,8 @@ class TaxjarAccountTaxGroupAdapter(Component):
             })
             taxed_amount += result_line['tax_collectable']
 
-        freight_tax = result.amount_to_collect - taxed_amount
+        freight_tax = company.currency_id.round(
+            result.amount_to_collect - taxed_amount)
         if freight_tax:
             freight_tax_price = freight_tax / len(shipping_lines)
             freight_tax_rate = freight_tax / shipping_charge
