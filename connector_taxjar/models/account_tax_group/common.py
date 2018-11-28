@@ -35,8 +35,7 @@ class AccountTaxGroup(models.Model):
             account_invoice_tax
         )
         if self.cache_name and 'taxjar' in self.cache_name:
-            # TODO Readd .with_delay() when work
-            delayed = self.env['taxjar.account.tax.group']
+            delayed = self.env['taxjar.account.tax.group'].with_delay()
             return delayed.do_tax_purchase(transaction)
         return transaction
 
@@ -46,8 +45,7 @@ class AccountTaxGroup(models.Model):
             account_invoice_tax
         )
         if self.cache_name and 'taxjar' in self.cache_name:
-            # TODO Readd .with_delay() when work
-            delayed = self.env['taxjar.account.tax.group']
+            delayed = self.env['taxjar.account.tax.group'].with_delay()
             return delayed.do_tax_refund(transaction)
         return transaction
 
@@ -207,27 +205,28 @@ class TaxjarAccountTaxGroupAdapter(Component):
     def _get_order_values_from_transaction(self, transaction):
 
         # @TODO: (In ReadMe): Support line items in base module
-        # line_items = []
-        # for invoice_line in transaction.invoice_line_ids:
-        #
-        #     for tax in invoice_line.product_id.taxes_id:
-        #         if tax.taxjar_product_code:
-        #             product_code = tax.taxjar_product_code
-        #             break
-        #     else:
-        #         product_code = None
-        #
-        #     price_total = invoice_line.price_unit * invoice_line.quantity
-        #     discount = price_total * (invoice_line.discount / 100)
-        #
-        #     line_items.append({
-        #         'description': invoice_line.product_id.name,
-        #         'unit_price': invoice_line.price_unit,
-        #         'quantity': invoice_line.quantity,
-        #         'product_identifier': invoice_line.product_id.id,
-        #         'product_tax_code': product_code,
-        #         'discount': discount,
-        #     })
+        line_items = []
+        for invoice_line in transaction.invoice_line_ids:
+
+            for tax in invoice_line.product_id.taxes_id:
+                if tax.taxjar_product_code:
+                    product_code = tax.taxjar_product_code
+                    break
+            else:
+                product_code = None
+            price_total = invoice_line.price_subtotal_signed
+            discount = price_total * (invoice_line.discount / 100)
+            sale_tax = invoice_line.price_total - invoice_line.price_subtotal
+
+            line_items.append({
+                'description': invoice_line.product_id.name,
+                'unit_price': invoice_line.price_unit,
+                'quantity': invoice_line.quantity,
+                'product_identifier': str(invoice_line.product_id.id),
+                'product_tax_code': product_code,
+                'discount': discount,
+                'sale_tax': sale_tax,
+            })
 
         values = {
             'transaction_id': transaction.id,
@@ -235,6 +234,7 @@ class TaxjarAccountTaxGroupAdapter(Component):
             'amount': transaction.amount_subtotal,
             'shipping': 0,
             'sales_tax': transaction.amount_tax,
+            'line_items': line_items
         }
         values.update(
             self._get_partner_address(transaction.company_id, 'from'),

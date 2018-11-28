@@ -245,12 +245,12 @@ class AccountTaxRate(models.TransientModel):
 
         # If there was no rate found, try a less precise search.
         # This covers onchange scenarios, in which all ``id``s are ``NewId``.
-        if not rate:
-            domain_sloppy = [
-                ('partner_id', '=', rate_values['partner_id']),
-                ('company_id', '=', rate_values['company_id']),
-            ]
-            rate = self.search(base_domain + domain_sloppy, limit=1)
+        # if not rate:
+        #     domain_sloppy = [
+        #         ('partner_id', '=', rate_values['partner_id']),
+        #         ('company_id', '=', rate_values['company_id']),
+        #     ]
+        #     rate = self.search(base_domain + domain_sloppy, limit=1)
 
         if rate and not origin and not rate.is_dirty():
             _logger.info('Rate is not dirty. Return it without mods')
