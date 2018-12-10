@@ -72,4 +72,12 @@ class TaxjarAccountFiscalPositionAdapter(Component):
     _apply_on = 'taxjar.account.fiscal.position'
 
     def search_read(self, filters=None):
-        return self.taxjar.nexus_regions()
+        nexus_regions = self.taxjar.nexus_regions()
+        for nexus in nexus_regions.data[:]:
+            res_country_state_id = self.env['res.country.state'].search([
+                ('name', '=', nexus['region'])
+            ], limit=1).id
+            if self.env['taxjar.account.fiscal.position'].search(
+                    [('state_ids', 'in', res_country_state_id)]):
+                nexus_regions.data.remove(nexus)
+        return nexus_regions

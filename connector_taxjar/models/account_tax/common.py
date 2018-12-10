@@ -52,4 +52,9 @@ class TaxjarAccountTaxAdapter(Component):
     _apply_on = 'taxjar.account.tax'
 
     def search_read(self, filters=None):
-        return self.taxjar.categories()
+        categories = self.taxjar.categories()
+        for category in categories.data[:]:
+            if self.env['account.tax'].search([('taxjar_product_code', '=',
+                                                category.product_tax_code)]):
+                categories.data.remove(category)
+        return categories
